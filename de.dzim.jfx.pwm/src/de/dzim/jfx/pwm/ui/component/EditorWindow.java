@@ -57,6 +57,9 @@ public class EditorWindow implements InternalAdapter {
 	public static final String UPDATE_ENTRY = EditorWindow.class.getName()
 			+ ".update.entry";
 
+	public static final String UPDATE_FILE = EditorWindow.class.getName()
+			+ ".update.file";
+
 	// window
 
 	private final InternalAdapter parentAdapter;
@@ -73,7 +76,7 @@ public class EditorWindow implements InternalAdapter {
 				MainWindow.GROUP_UNLOADED, MainWindow.ENTRY_SELECTED,
 				MainWindow.ENTRY_NOT_SELECTED,
 				// from current window
-				UPDATE_DATABASE, UPDATE_CONTENT, UPDATE_ENTRY);
+				UPDATE_DATABASE, UPDATE_CONTENT, UPDATE_ENTRY, UPDATE_FILE);
 	}
 
 	public Pane createContent() {
@@ -322,7 +325,7 @@ public class EditorWindow implements InternalAdapter {
 		return vbox;
 	}
 
-	public void updateDatabase(File containerFile, PWMContainer container) {
+	private void updateDatabase(File containerFile, PWMContainer container) {
 
 		if (container == null)
 			return;
@@ -345,7 +348,7 @@ public class EditorWindow implements InternalAdapter {
 		EventHandler.getInstance().fireEvent(container, MainWindow.FILE_OPENED);
 	}
 
-	public void updateContent(PWMGroup group, String password) {
+	private void updateContent(PWMGroup group, String password) {
 
 		if (this.currentGroup != null)
 			currentGroup.removeListener(internalPropertyChangeListener);
@@ -364,7 +367,7 @@ public class EditorWindow implements InternalAdapter {
 				MainWindow.ENTRY_NOT_SELECTED);
 	}
 
-	public void updateEntry(PWMGroupEntry entry) {
+	private void updateEntry(PWMGroupEntry entry) {
 
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
@@ -644,6 +647,8 @@ public class EditorWindow implements InternalAdapter {
 				updateContent((PWMGroup) source[0], (String) source[1]);
 			} else if (event.getName().equals(UPDATE_ENTRY)) {
 				updateEntry((PWMGroupEntry) event.getSource());
+			} else if (event.getName().equals(UPDATE_FILE)) {
+				EditorWindow.this.containerFile = (File) event.getSource();
 			} else if (event.getName().equals(MainWindow.FILE_OPENED)) {
 				creator.getMenuItem(PWMActionEventHandler.Type.ADD_GROUP)
 						.setDisable(false);

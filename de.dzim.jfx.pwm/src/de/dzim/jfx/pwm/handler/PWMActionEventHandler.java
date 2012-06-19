@@ -43,7 +43,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 
 	public enum Type {
 		// file
-		EXIT, OPEN, SAVE, SAVE_AS,
+		NEW, EXIT, OPEN, SAVE, SAVE_AS,
 		// group
 		ADD_GROUP, ADD_SUB_GROUP, EDIT_GROUP, REMOVE_GROUP,
 		// entry
@@ -74,6 +74,9 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 		switch (type) {
 		case EXIT:
 			handleExit(event);
+			break;
+		case NEW:
+			handleNew(event);
 			break;
 		case OPEN:
 			handleOpen(event);
@@ -122,6 +125,73 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 
 	private void handleExit(ActionEvent event) {
 		System.exit(0);
+	}
+
+	private void handleNew(ActionEvent event) {
+
+		File old_containerFile = (File) adapter.getInternalAdapter(File.class);
+		PWMContainer old_container = (PWMContainer) adapter
+				.getInternalAdapter(PWMContainer.class);
+
+		Window owner = getOwner();
+
+		Boolean dirty = (Boolean) adapter.getInternalAdapter(Boolean.class);
+		if (dirty != null && dirty) {
+			boolean confirm = MessageDialog
+					.showQuestion(owner, "PWM - Save Changes?",
+							"There are unfinished changes.\nDo you want to save them first?");
+			if (confirm) {
+				try {
+					PWMUtils.savePWMContainer(old_containerFile, old_container);
+					de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+							old_containerFile, MainWindow.NOT_DIRTY);
+				} catch (Exception e) {
+					e.printStackTrace();
+					String message = String
+							.format("An error occured on saving a database:\n\n%s\n\nDo you want to continue?",
+									e.getMessage());
+					boolean _continue = MessageDialog.showQuestion(owner,
+							"PWM - Error", message);
+					if (!_continue)
+						return;
+				}
+			}
+		}
+
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Open PWM Database File");
+		chooser.getExtensionFilters().addAll(getExtensionFilter());
+		if (old_containerFile != null)
+			chooser.setInitialDirectory(old_containerFile.getParentFile());
+		File containerFile = chooser.showSaveDialog(owner);
+
+		if (containerFile == null)
+			return;
+
+		String t = containerFile.getAbsolutePath();
+		if (t.toLowerCase().endsWith(PWMUtils.DEFAULT_EXTENSION_BACKUP))
+			t = t.substring(0, t.lastIndexOf(PWMUtils.DEFAULT_EXTENSION_BACKUP));
+		else if (t.toLowerCase().endsWith(PWMUtils.DEFAULT_EXTENSION))
+			t = t.substring(0, t.lastIndexOf(PWMUtils.DEFAULT_EXTENSION));
+		containerFile = new File(t + PWMUtils.DEFAULT_EXTENSION);
+
+		try {
+			PWMContainer container = new PWMContainer();
+			PWMUtils.savePWMContainer(containerFile, container);
+			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+					new Object[] { containerFile, container },
+					EditorWindow.UPDATE_DATABASE);
+			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+					containerFile, MainWindow.NOT_DIRTY);
+			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+					containerFile, EditorWindow.UPDATE_FILE);
+		} catch (Exception e) {
+			e.printStackTrace();
+			String message = String.format(
+					"An error occured on creating a new database:\n\n%s",
+					e.getMessage());
+			MessageDialog.showError(owner, "PWM - Error", message);
+		}
 	}
 
 	private void handleOpen(ActionEvent event) {
@@ -209,6 +279,8 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 			PWMUtils.savePWMContainer(containerFile, container);
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
 					containerFile, MainWindow.NOT_DIRTY);
+			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+					containerFile, EditorWindow.UPDATE_FILE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(

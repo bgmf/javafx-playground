@@ -39,16 +39,16 @@ public class MainWindow implements InternalAdapter {
 			+ ".dirty.not";
 	public static final String GROUP_SELECTED = MainWindow.class.getName()
 			+ "group.selected";
-	public static final String GROUP_NOT_SELECTED = MainWindow.class
-			.getName() + "group.selected.not";
+	public static final String GROUP_NOT_SELECTED = MainWindow.class.getName()
+			+ "group.selected.not";
 	public static final String GROUP_LOADED = MainWindow.class.getName()
 			+ "group.loaded";
 	public static final String GROUP_UNLOADED = MainWindow.class.getName()
 			+ "group.loaded.not";
 	public static final String ENTRY_SELECTED = MainWindow.class.getName()
 			+ "entry.selected";
-	public static final String ENTRY_NOT_SELECTED = MainWindow.class
-			.getName() + "entry.selected.not";
+	public static final String ENTRY_NOT_SELECTED = MainWindow.class.getName()
+			+ "entry.selected.not";
 
 	// window
 
@@ -121,6 +121,7 @@ public class MainWindow implements InternalAdapter {
 			root.getChildren().add(editorPane);
 	}
 
+	private MenuItem fileNewItem;
 	private MenuItem fileOpenItem;
 	private MenuItem fileSaveItem;
 	private MenuItem fileSaveAsItem;
@@ -141,6 +142,8 @@ public class MainWindow implements InternalAdapter {
 
 		Menu file = new Menu("_File");
 
+		fileNewItem = new MenuItem("_New",
+				ImageResource.getImageView(ImageResourceType.NEW));
 		fileOpenItem = new MenuItem("_Open",
 				ImageResource.getImageView(ImageResourceType.OPEN));
 		fileSaveItem = new MenuItem("_Save",
@@ -150,18 +153,20 @@ public class MainWindow implements InternalAdapter {
 		fileExitItem = new MenuItem("E_xit",
 				ImageResource.getImageView(ImageResourceType.EXIT));
 
+		fileNewItem.setAccelerator(KeyCombination.valueOf("Ctrl+N"));
 		fileOpenItem.setAccelerator(KeyCombination.valueOf("Ctrl+O"));
 		fileSaveItem.setAccelerator(KeyCombination.valueOf("Ctrl+S"));
 		fileExitItem.setAccelerator(KeyCombination.valueOf("Ctrl+X"));
 
-		fileExitItem.setOnAction(getHandler(Type.EXIT));
+		fileNewItem.setOnAction(getHandler(Type.NEW));
 		fileOpenItem.setOnAction(getHandler(Type.OPEN));
 		fileSaveItem.setOnAction(getHandler(Type.SAVE));
 		fileSaveAsItem.setOnAction(getHandler(Type.SAVE_AS));
+		fileExitItem.setOnAction(getHandler(Type.EXIT));
 
-		file.getItems().addAll(fileOpenItem, new SeparatorMenuItem(),
-				fileSaveItem, fileSaveAsItem, new SeparatorMenuItem(),
-				fileExitItem);
+		file.getItems().addAll(fileNewItem, fileOpenItem,
+				new SeparatorMenuItem(), fileSaveItem, fileSaveAsItem,
+				new SeparatorMenuItem(), fileExitItem);
 
 		// group menu
 
@@ -225,8 +230,8 @@ public class MainWindow implements InternalAdapter {
 		menubar.getMenus().addAll(file, group, entry);
 	}
 
+	private Button newButton;
 	private Button openButton;
-
 	private Button saveButton;
 	private Button saveAsButton;
 
@@ -241,11 +246,13 @@ public class MainWindow implements InternalAdapter {
 
 	private void createToolbar(ToolBar toolbar) {
 
+		newButton = new Button(
+				ImageResource.getImage(ImageResourceType.NEW) == null ? "New"
+						: "", ImageResource.getImageView(ImageResourceType.NEW));
 		openButton = new Button(
 				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Open"
 						: "",
 				ImageResource.getImageView(ImageResourceType.OPEN));
-
 		saveButton = new Button(
 				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Save"
 						: "",
@@ -285,6 +292,7 @@ public class MainWindow implements InternalAdapter {
 						: "",
 				ImageResource.getImageView(ImageResourceType.REMOVE_ENTRY));
 
+		newButton.setOnAction(getHandler(Type.NEW));
 		openButton.setOnAction(getHandler(Type.OPEN));
 		saveButton.setOnAction(getHandler(Type.SAVE));
 		saveAsButton.setOnAction(getHandler(Type.SAVE_AS));
@@ -308,8 +316,8 @@ public class MainWindow implements InternalAdapter {
 		editEntryButton.setDisable(true);
 		removeEntryButton.setDisable(true);
 
-		toolbar.getItems().addAll(openButton, new Separator(), saveButton,
-				saveAsButton, new Separator(), addGroupButton,
+		toolbar.getItems().addAll(newButton, openButton, new Separator(),
+				saveButton, saveAsButton, new Separator(), addGroupButton,
 				addSubGroupButton, editGroupButton, removeGroupButton,
 				new Separator(), addEntryButton, editEntryButton,
 				removeEntryButton);
@@ -339,8 +347,13 @@ public class MainWindow implements InternalAdapter {
 			return editor.getInternalAdapter(adapter);
 		else if (String.class.isAssignableFrom(adapter))
 			return editor.getInternalAdapter(adapter);
+		else if (Boolean.class.isAssignableFrom(adapter)
+				|| boolean.class.isAssignableFrom(adapter))
+			return dirty;
 		return null;
 	}
+
+	private boolean dirty = false;
 
 	private class InternalEventHandlerListener implements EventHandlerListener {
 		@Override
@@ -355,9 +368,11 @@ public class MainWindow implements InternalAdapter {
 			} else if (event.getName().equals(DIRTY)) {
 				saveButton.setDisable(false);
 				fileSaveItem.setDisable(false);
+				dirty = true;
 			} else if (event.getName().equals(NOT_DIRTY)) {
 				saveButton.setDisable(true);
 				fileSaveItem.setDisable(true);
+				dirty = false;
 			} else if (event.getName().equals(GROUP_SELECTED)) {
 				addSubGroupButton.setDisable(false);
 				groupAddSubItem.setDisable(false);

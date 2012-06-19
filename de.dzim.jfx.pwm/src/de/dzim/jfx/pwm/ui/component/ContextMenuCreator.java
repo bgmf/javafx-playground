@@ -35,6 +35,8 @@ public class ContextMenuCreator {
 		switch (type) {
 		case EXIT:
 			break;
+		case NEW:
+			break;
 		case OPEN:
 			break;
 		case SAVE:

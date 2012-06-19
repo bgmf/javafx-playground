@@ -16,6 +16,8 @@ public class ImageResource {
 
 		// exit icon
 		EXIT("fugue_door-open-in.png"),
+		// new icon
+		NEW("fugue_database--plus.png"),
 		// open icon
 		OPEN("fugue_database.png"),
 		// save icon
@@ -69,7 +71,7 @@ public class ImageResource {
 		NEXT("fugue_arrow.png"),
 		// back
 		BACK("fugue_arrow-180.png"),
-		
+
 		//
 		// group icons
 		//
@@ -93,11 +95,11 @@ public class ImageResource {
 		EDIT_ENTRY("fugue_key--pencil.png"),
 		// remove entry icon
 		REMOVE_ENTRY("fugue_key--minus.png"),
-		
+
 		//
 		// clipboard icons
 		//
-		
+
 		// invoice
 		CLIPBOARD_INVOICE("fugue_clipboard-invoice.png");
 

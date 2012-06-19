@@ -2,8 +2,12 @@
 OPEN
 ================================================================================
 
-- beim editieren von Einträgen (Entries) werden diese in der Tabelle nicht angepasst
+- beim Editieren von Einträgen (Entries) werden diese in der Tabelle nicht angepasst
 
 ================================================================================
 CLOSE
 ================================================================================
+
+- keine neuen Datanbanken anlegbar --> missing feature (ich weiß nicht, wie das passieren konnte :-D )
+- "Speichern Unter..." legt zwar neue Datei an, biegt aber den Pfad nicht auf die neue Datei um
+  --> weitere Änderungen (aber auch die, vor dem "Speichern Unter...") werden in die alte DB geschrieben

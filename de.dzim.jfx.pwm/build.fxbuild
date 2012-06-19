@@ -3,4 +3,3 @@ jfx.build.apptitle = PWM - The Password Manager
 jfx.build.appversion = 0.0.1
 jfx.build.vendorname = Daniel Zimmermann
 jfx.build.applicationClass = de.dzim.rcp.pwm.ui.PWMJFXApplication
-jfx.build.preloaderClass = de.dzim.rcp.pwm.ui.PWMJFXPreloader
