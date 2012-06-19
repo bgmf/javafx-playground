@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import de.dzim.jfx.event.EventHandler;
 import de.dzim.jfx.event.EventHandler.Event;
@@ -24,6 +25,7 @@ import de.dzim.jfx.pwm.model.container.PWMContainer;
 import de.dzim.jfx.pwm.model.container.PWMContainerGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
+import de.dzim.jfx.pwm.ui.PWMJFXApplication;
 import de.dzim.jfx.pwm.util.InternalAdapter;
 import de.dzim.jfx.ui.resource.ImageResource;
 import de.dzim.jfx.ui.resource.ImageResource.ImageResourceType;
@@ -34,21 +36,28 @@ public class MainWindow implements InternalAdapter {
 
 	public static final String FILE_OPENED = MainWindow.class.getName()
 			+ ".file-opened";
+
 	public static final String DIRTY = MainWindow.class.getName() + ".dirty";
 	public static final String NOT_DIRTY = MainWindow.class.getName()
 			+ ".dirty.not";
+
 	public static final String GROUP_SELECTED = MainWindow.class.getName()
 			+ "group.selected";
 	public static final String GROUP_NOT_SELECTED = MainWindow.class.getName()
 			+ "group.selected.not";
+
 	public static final String GROUP_LOADED = MainWindow.class.getName()
 			+ "group.loaded";
 	public static final String GROUP_UNLOADED = MainWindow.class.getName()
 			+ "group.loaded.not";
+
 	public static final String ENTRY_SELECTED = MainWindow.class.getName()
 			+ "entry.selected";
 	public static final String ENTRY_NOT_SELECTED = MainWindow.class.getName()
 			+ "entry.selected.not";
+
+	public static final String UPDATE_FILE = MainWindow.class.getName()
+			+ ".update.file";
 
 	// window
 
@@ -87,19 +96,23 @@ public class MainWindow implements InternalAdapter {
 		return createToolbar;
 	}
 
+	private MenuBar menubar;
+	private ToolBar toolbar;
+
 	public void createContent() {
 
 		VBox menubarToolbarBox = new VBox(0);
 
 		if (createMenu) {
-			MenuBar menubar = new MenuBar();
+			menubar = new MenuBar();
 			menubar.setUseSystemMenuBar(false);
 			createMenuBar(menubar);
 			menubarToolbarBox.getChildren().add(menubar);
 		}
 
 		if (createToolbar) {
-			ToolBar toolbar = new ToolBar();
+			toolbar = new ToolBar();
+			toolbar.setCache(false);
 			createToolbar(toolbar);
 			menubarToolbarBox.getChildren().add(toolbar);
 		}
@@ -354,10 +367,12 @@ public class MainWindow implements InternalAdapter {
 	}
 
 	private boolean dirty = false;
+	private File containerFile = null;
 
 	private class InternalEventHandlerListener implements EventHandlerListener {
 		@Override
 		public void handleEvent(Event event) {
+
 			if (event.getName() == null)
 				return;
 			else if (event.getName().equals(FILE_OPENED)) {
@@ -365,6 +380,11 @@ public class MainWindow implements InternalAdapter {
 				fileSaveAsItem.setDisable(false);
 				addGroupButton.setDisable(false);
 				groupAddItem.setDisable(false);
+				if (event.getSource() != null
+						&& event.getSource() instanceof File)
+					containerFile = (File) event.getSource();
+			} else if (event.getName().equals(UPDATE_FILE)) {
+				containerFile = (File) event.getSource();
 			} else if (event.getName().equals(DIRTY)) {
 				saveButton.setDisable(false);
 				fileSaveItem.setDisable(false);
@@ -404,6 +424,17 @@ public class MainWindow implements InternalAdapter {
 				removeEntryButton.setDisable(true);
 				entryRemoveItem.setDisable(true);
 			}
+
+			Stage parentStage = null;
+			if (parent instanceof Stage)
+				parentStage = (Stage) parent;
+			if (parentStage != null)
+				parentStage.setTitle(String
+						.format("%s%s%s",
+								dirty ? "*" : "",
+								PWMJFXApplication.APPLICATION_TITLE,
+								containerFile != null ? (": " + containerFile
+										.getName()) : ""));
 		}
 	}
 }

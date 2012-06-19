@@ -145,6 +145,8 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 					PWMUtils.savePWMContainer(old_containerFile, old_container);
 					de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
 							old_containerFile, MainWindow.NOT_DIRTY);
+					de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+							old_containerFile, MainWindow.UPDATE_FILE);
 				} catch (Exception e) {
 					e.printStackTrace();
 					String message = String
@@ -184,7 +186,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
 					containerFile, MainWindow.NOT_DIRTY);
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
-					containerFile, EditorWindow.UPDATE_FILE);
+					containerFile, MainWindow.UPDATE_FILE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -240,6 +242,8 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 			PWMUtils.savePWMContainer(containerFile, container);
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
 					containerFile, MainWindow.NOT_DIRTY);
+			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
+					containerFile, MainWindow.UPDATE_FILE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Window owner = getOwner();
@@ -280,7 +284,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
 					containerFile, MainWindow.NOT_DIRTY);
 			de.dzim.jfx.event.EventHandler.getInstance().fireEvent(
-					containerFile, EditorWindow.UPDATE_FILE);
+					containerFile, MainWindow.UPDATE_FILE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -445,7 +449,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 		PWMGroupEntry currentEntry = (PWMGroupEntry) adapter
 				.getInternalAdapter(PWMGroupEntry.class);
 
-		if (currentEntry == null || currentGroup == null)
+		if (currentGroup == null)
 			return;
 
 		EntryDialog dialog = new EntryDialog(getOwner(), EntryDialog.Type.ADD,
@@ -457,7 +461,8 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 
 		Calendar c = Calendar.getInstance();
 
-		dialog.getResult().setId(PWMUtils.getPWMID(currentEntry.getName(), c));
+		dialog.getResult().setId(
+				PWMUtils.getPWMID(dialog.getResult().getName(), c));
 		dialog.getResult().setDateAdded(c);
 		dialog.getResult().setDateModified(c);
 
@@ -535,7 +540,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 		Calendar c = Calendar.getInstance();
 
 		if (currentEntry.getId() == null || currentEntry.getId().isEmpty()) {
-			currentEntry.setId(PWMUtils.getPWMID(currentEntry.getName(), c));
+			currentEntry.setId(PWMUtils.getPWMID(result.getName(), c));
 			modified = true;
 		}
 		if (currentEntry.getDateAdded() == null) {

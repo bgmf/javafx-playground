@@ -101,7 +101,16 @@ public class ImageResource {
 		//
 
 		// invoice
-		CLIPBOARD_INVOICE("fugue_clipboard-invoice.png");
+		CLIPBOARD_INVOICE("fugue_clipboard-invoice.png"),
+
+		//
+		// other icons
+		//
+
+		// lock
+		LOCK_16("fugue_lock.png"),
+		// lock 32x32
+		LOCK_32("fugue_32_lock.png");
 
 		private final String name;
 

@@ -11,3 +11,9 @@ CLOSE
 - keine neuen Datanbanken anlegbar --> missing feature (ich weiß nicht, wie das passieren konnte :-D )
 - "Speichern Unter..." legt zwar neue Datei an, biegt aber den Pfad nicht auf die neue Datei um
   --> weitere Änderungen (aber auch die, vor dem "Speichern Unter...") werden in die alte DB geschrieben
+- wenn neue Gruppe angelegt wurde, keine Möglichkeit, einen ersten Eintrag anzulegen
+  --> erforderte einen angewählten Eintrag - warum auch immer...
+- neues Entry oder Entry anpassen
+  --> verwendete für die ID die Daten des gegenwärtig ausgewählten Entries, anstelle des angepassten
+- Sternchen (wenn editierte Datei offen) und Dateinamen im Titel (wenn überhaupt eine Datei offen)
+- Icon der Größe 32x32 ("lock" aus Fugue)

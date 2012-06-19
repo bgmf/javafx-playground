@@ -57,9 +57,6 @@ public class EditorWindow implements InternalAdapter {
 	public static final String UPDATE_ENTRY = EditorWindow.class.getName()
 			+ ".update.entry";
 
-	public static final String UPDATE_FILE = EditorWindow.class.getName()
-			+ ".update.file";
-
 	// window
 
 	private final InternalAdapter parentAdapter;
@@ -74,9 +71,9 @@ public class EditorWindow implements InternalAdapter {
 				MainWindow.FILE_OPENED, MainWindow.GROUP_SELECTED,
 				MainWindow.GROUP_NOT_SELECTED, MainWindow.GROUP_LOADED,
 				MainWindow.GROUP_UNLOADED, MainWindow.ENTRY_SELECTED,
-				MainWindow.ENTRY_NOT_SELECTED,
+				MainWindow.ENTRY_NOT_SELECTED, MainWindow.UPDATE_FILE,
 				// from current window
-				UPDATE_DATABASE, UPDATE_CONTENT, UPDATE_ENTRY, UPDATE_FILE);
+				UPDATE_DATABASE, UPDATE_CONTENT, UPDATE_ENTRY);
 	}
 
 	public Pane createContent() {
@@ -345,7 +342,8 @@ public class EditorWindow implements InternalAdapter {
 		contentTableView.setItems(FXCollections
 				.<PWMGroupEntry> emptyObservableList());
 
-		EventHandler.getInstance().fireEvent(container, MainWindow.FILE_OPENED);
+		EventHandler.getInstance().fireEvent(this.containerFile,
+				MainWindow.FILE_OPENED);
 	}
 
 	private void updateContent(PWMGroup group, String password) {
@@ -605,9 +603,6 @@ public class EditorWindow implements InternalAdapter {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 
-			System.err.printf("%s --> %s%n", evt.getPropertyName(), evt
-					.getNewValue().toString());
-
 			EventHandler.getInstance().fireEvent(evt.getNewValue(),
 					MainWindow.DIRTY);
 
@@ -647,7 +642,7 @@ public class EditorWindow implements InternalAdapter {
 				updateContent((PWMGroup) source[0], (String) source[1]);
 			} else if (event.getName().equals(UPDATE_ENTRY)) {
 				updateEntry((PWMGroupEntry) event.getSource());
-			} else if (event.getName().equals(UPDATE_FILE)) {
+			} else if (event.getName().equals(MainWindow.UPDATE_FILE)) {
 				EditorWindow.this.containerFile = (File) event.getSource();
 			} else if (event.getName().equals(MainWindow.FILE_OPENED)) {
 				creator.getMenuItem(PWMActionEventHandler.Type.ADD_GROUP)
