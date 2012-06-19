@@ -1,0 +1,98 @@
+package de.dzim.jfx.pwm.ui.dialog
+
+import javafx.scene.layout.GridPane
+import javafx.scene.control.Label
+import javafx.scene.control.TextField
+import javafx.scene.control.PasswordField
+import javafx.scene.control.Separator
+import javafx.scene.control.TextArea
+
+component EntryDialog {
+	
+	GridPane {
+		
+		hgap : 5,
+		vgap : 5,
+		
+		Label id areaTitle {
+			text : "Entry Dialog",
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 0,
+			call GridPane#columnSpan : 4,
+			call GridPane#hgrow : "SOMETIMES",
+			call GridPane#halignment : "CENTER"
+		},
+		
+		Label {
+			text : "Title:",
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 1
+		},
+		TextField id titleField {
+			promptText : "the title of the entry",
+			onKeyReleased : controllermethod handleTitle,
+			call GridPane#columnIndex : 1,
+			call GridPane#rowIndex : 1,
+			call GridPane#columnSpan : 3,
+			call GridPane#hgrow : "SOMETIMES"
+		},
+		Label {
+			text : "Username:",
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 2
+		},
+		TextField id userField {
+			promptText : "the users nickname",
+			onKeyReleased : controllermethod handleUser,
+			call GridPane#columnIndex : 1,
+			call GridPane#rowIndex : 2,
+			call GridPane#hgrow : "SOMETIMES"
+		},
+		Label {
+			text:"Password:",
+			call GridPane#columnIndex : 2,
+			call GridPane#rowIndex : 2
+		},
+		PasswordField id passwordField {
+			promptText : "the users password",
+			onKeyReleased : controllermethod handlePassword,
+			call GridPane#columnIndex : 3,
+			call GridPane#rowIndex : 2,
+			call GridPane#hgrow : "SOMETIMES"
+		},
+		Label {
+			text : "URL:",
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 3
+		},
+		TextField id urlField {
+			promptText : "the target url",
+			onKeyReleased : controllermethod handleUrl,
+			call GridPane#columnIndex : 1,
+			call GridPane#rowIndex : 3,
+			call GridPane#columnSpan : 3,
+			call GridPane#hgrow : "SOMETIMES"
+		},
+		
+		Separator {
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 4,
+			call GridPane#columnSpan : 4,
+			call GridPane#hgrow : "SOMETIMES"
+		},
+		
+		Label {
+			text : "Description:",
+			call GridPane#columnIndex : 0,
+			call GridPane#rowIndex : 5
+		},
+		TextArea id descriptionArea {
+			promptText : "enter the description of the entry - the text is allowed to wrap",
+			onKeyReleased : controllermethod handleDescr,
+			call GridPane#columnIndex : 1,
+			call GridPane#rowIndex : 5,
+			call GridPane#columnSpan : 3,
+			call GridPane#hgrow : "SOMETIMES"
+		}
+	}
+}

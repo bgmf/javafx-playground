@@ -1,0 +1,4 @@
+- TODO-Programm
+- Counter-App
+- Stundenverwaltung
+- Basic Platform (OSGi, aber ohne SWT)
