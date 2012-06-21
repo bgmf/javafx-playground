@@ -1,9 +1,13 @@
 package de.dzim.jfx.pwm.ui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import de.dzim.jfx.pwm.handler.PWMActionEventHandler;
+import de.dzim.jfx.pwm.handler.PWMActionEventHandler.Type;
 import de.dzim.jfx.pwm.ui.component.MainWindow;
 import de.dzim.jfx.ui.dialog.MessageDialog;
 import de.dzim.jfx.ui.resource.ImageResource;
@@ -17,7 +21,7 @@ public class PWMJFXApplication extends Application {
 	public static final String APPLICATION_TITLE = "PWM - The Password Manager";
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 
 		primaryStage.setTitle(APPLICATION_TITLE);
 		primaryStage.getIcons().add(
@@ -26,7 +30,7 @@ public class PWMJFXApplication extends Application {
 		GridPane root = new GridPane();
 		root.setId("root-grid-pane");
 
-		MainWindow window = new MainWindow(primaryStage, root);
+		final MainWindow window = new MainWindow(primaryStage, root);
 		window.setCreateMenu(true);
 		window.createContent();
 
@@ -37,6 +41,26 @@ public class PWMJFXApplication extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+		primaryStage
+				.setOnCloseRequest(new javafx.event.EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent event) {
+						Boolean dirty = (Boolean) window
+								.getInternalAdapter(Boolean.class);
+						if (dirty) {
+							boolean confirm = MessageDialog
+									.showQuestion(primaryStage,
+											"Unsaved data!",
+											"Do you want to save your data before exiting the program?");
+							if (!confirm)
+								return;
+							PWMActionEventHandler handler = new PWMActionEventHandler(
+									Type.SAVE, window);
+							handler.handle(new ActionEvent());
+						}
+					}
+				});
 	}
 
 	public static void main(String[] args) {
