@@ -12,9 +12,9 @@ import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
 import de.dzim.jfx.pwm.ui.component.EditorWindow;
 import de.dzim.jfx.pwm.ui.component.MainWindow;
 import de.dzim.jfx.pwm.ui.dialog.PasswordDialog;
-import de.dzim.jfx.pwm.util.InternalAdapter;
 import de.dzim.jfx.pwm.util.PWMUtils;
 import de.dzim.jfx.ui.dialog.MessageDialog;
+import de.dzim.jfx.util.InternalAdapter;
 
 public class PWMMouseEventHandler implements EventHandler<MouseEvent> {
 

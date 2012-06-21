@@ -23,6 +23,7 @@ import de.dzim.jfx.pwm.model.container.PWMContainer;
 import de.dzim.jfx.pwm.model.container.PWMContainerGroup;
 import de.dzim.jfx.pwm.model.container.PWMContainerGroupContent;
 import de.dzim.jfx.pwm.model.content.PWMGroup;
+import de.dzim.jfx.util.EncryptionDecryptionUtils;
 
 public class PWMUtils {
 

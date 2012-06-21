@@ -4,7 +4,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableCell;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
-import de.dzim.jfx.pwm.util.InternalAdapter;
+import de.dzim.jfx.util.InternalAdapter;
 
 class PWMGroupEntryHyperlinkCell extends TableCell<PWMGroupEntry, String> {
 

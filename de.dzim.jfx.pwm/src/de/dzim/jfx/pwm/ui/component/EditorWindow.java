@@ -44,7 +44,7 @@ import de.dzim.jfx.pwm.model.container.PWMContainer;
 import de.dzim.jfx.pwm.model.container.PWMContainerGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
-import de.dzim.jfx.pwm.util.InternalAdapter;
+import de.dzim.jfx.util.InternalAdapter;
 
 public class EditorWindow implements InternalAdapter {
 

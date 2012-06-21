@@ -9,9 +9,9 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.KeyCombination;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler.Type;
-import de.dzim.jfx.pwm.util.InternalAdapter;
 import de.dzim.jfx.ui.resource.ImageResource;
 import de.dzim.jfx.ui.resource.ImageResource.ImageResourceType;
+import de.dzim.jfx.util.InternalAdapter;
 
 public class ContextMenuCreator {
 

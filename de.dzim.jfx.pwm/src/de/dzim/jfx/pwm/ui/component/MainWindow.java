@@ -26,9 +26,9 @@ import de.dzim.jfx.pwm.model.container.PWMContainerGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
 import de.dzim.jfx.pwm.ui.PWMJFXApplication;
-import de.dzim.jfx.pwm.util.InternalAdapter;
 import de.dzim.jfx.ui.resource.ImageResource;
 import de.dzim.jfx.ui.resource.ImageResource.ImageResourceType;
+import de.dzim.jfx.util.InternalAdapter;
 
 public class MainWindow implements InternalAdapter {
 
