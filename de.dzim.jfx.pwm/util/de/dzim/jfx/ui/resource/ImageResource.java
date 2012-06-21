@@ -110,7 +110,23 @@ public class ImageResource {
 		// lock
 		LOCK_16("fugue_lock.png"),
 		// lock 32x32
-		LOCK_32("fugue_32_lock.png");
+		LOCK_32("fugue_32_lock.png"),
+		// calendar
+		CALENDAR_16("fugue_calendar.png"),
+		// calendar 32x32
+		CALENDAR_32("fugue_32_calendar.png"),
+		// calendar
+		CALENDAR_BLUE_16("fugue_calendar-blue.png"),
+		// calendar 32x32
+		CALENDAR_BLUE_32("fugue_32_calendar-blue.png"),
+		// color base
+		COLOR_16("fugue_color.png"),
+		// color base 32x32
+		COLOR_32("fugue_32_color.png"),
+		// counter
+		COUNTER_16("fugue_counter.png"),
+		// counter 32x32
+		COUNTER_32("fugue_32_counter.png");
 
 		private final String name;
 
