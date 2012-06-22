@@ -1,10 +1,15 @@
 package de.dzim.jfx.pwm.ui;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler.Type;
@@ -20,21 +25,37 @@ public class PWMJFXApplication extends Application {
 
 	public static final String APPLICATION_TITLE = "PWM - The Password Manager";
 
+	public static boolean useCustomDecoration = false;
+
 	@Override
 	public void start(final Stage primaryStage) {
+
+		Node node = null;
+		try {
+			node = FXMLLoader.<Node> load(PWMJFXApplication.class
+					.getResource("DecorationArea.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (useCustomDecoration && node != null) {
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+		}
 
 		primaryStage.setTitle(APPLICATION_TITLE);
 		primaryStage.getIcons().add(
 				ImageResource.getImage(ImageResourceType.LOCK_32));
 
-		GridPane root = new GridPane();
-		root.setId("root-grid-pane");
+		GridPane grid = new GridPane();
+		grid.setId("root-grid-pane");
 
-		final MainWindow window = new MainWindow(primaryStage, root);
+		if (useCustomDecoration && node != null)
+			grid.add(node, 0, 0);
+
+		final MainWindow window = new MainWindow(primaryStage, grid);
 		window.setCreateMenu(true);
 		window.createContent();
 
-		Scene scene = new Scene(root, 1024, 800);
+		Scene scene = new Scene(grid, 1024, 800);
 		scene.getStylesheets().add(CSS);
 
 		MessageDialog.CSS_PATH = CSS_DIALOG;

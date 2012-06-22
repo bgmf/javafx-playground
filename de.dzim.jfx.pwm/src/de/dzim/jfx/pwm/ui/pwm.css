@@ -95,3 +95,45 @@
         rgb(0, 0, 0, 0.4),
         rgb(255, 255, 255);
 }
+
+#decorationArea {
+    -fx-padding: 10px;
+    -fx-background-image: url("resource/top-bar.png"),
+                          url("resource/clef.png");
+    -fx-background-size: cover, contain;
+    -fx-background-position: left top, center center;
+    -fx-background-repeat: no-repeat;
+}
+
+#window-resize-button {
+    -fx-background-image: url("resource/window-corner.png");
+    -fx-background-position: right 1px bottom 1px;
+    -fx-background-repeat: no-repeat;
+}
+#window_close {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("resource/window-close.png");
+    -fx-padding: 6 6 4 6;
+}
+#window_min {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("resource/window-min.png");
+    -fx-padding: 6 6 4 6;
+}
+#window_max {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("resource/window-expand.png");
+    -fx-padding: 6 6 4 6;
+}
+#window_close:hover {
+    -fx-background-image: url("resource/window-close-over.png");
+}
+#window_min:hover {
+    -fx-background-image: url("resource/window-min-over.png");
+}
+#window_max:hover {
+    -fx-background-image: url("resource/window-expand-over.png");
+}

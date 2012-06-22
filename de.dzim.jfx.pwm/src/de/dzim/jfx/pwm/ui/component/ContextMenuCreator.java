@@ -82,16 +82,20 @@ public class ContextMenuCreator {
 
 		if (groupAddItem == null)
 			groupAddItem = new MenuItem("_Add Group",
-					ImageResource.getImageView(ImageResourceType.ADD_GROUP));
+					ImageResource.getImageView(ImageResourceType.ADD_FOLDER_16));
 		if (groupAddSubItem == null)
-			groupAddSubItem = new MenuItem("Add _Sub-Group",
-					ImageResource.getImageView(ImageResourceType.ADD_SUB_GROUP));
+			groupAddSubItem = new MenuItem(
+					"Add _Sub-Group",
+					ImageResource
+							.getImageView(ImageResourceType.ADD_FOLDER_BOOKMARK_16));
 		if (groupEditItem == null)
 			groupEditItem = new MenuItem("_Edit Group",
-					ImageResource.getImageView(ImageResourceType.EDIT_GROUP));
+					ImageResource
+							.getImageView(ImageResourceType.EDIT_FOLDER_16));
 		if (groupRemoveItem == null)
 			groupRemoveItem = new MenuItem("_Remove Group",
-					ImageResource.getImageView(ImageResourceType.REMOVE_GROUP));
+					ImageResource
+							.getImageView(ImageResourceType.REMOVE_FOLDER_16));
 
 		if (withAccelerator) {
 			groupAddItem.setAccelerator(KeyCombination.valueOf("Ctrl+Shift+A"));
@@ -129,25 +133,28 @@ public class ContextMenuCreator {
 
 		if (entryAddItem == null)
 			entryAddItem = new MenuItem("_Add Entry",
-					ImageResource.getImageView(ImageResourceType.ADD_ENTRY));
+					ImageResource.getImageView(ImageResourceType.ADD_KEY_16));
 		if (entryEditItem == null)
 			entryEditItem = new MenuItem("_Edit Entry",
-					ImageResource.getImageView(ImageResourceType.EDIT_ENTRY));
+					ImageResource.getImageView(ImageResourceType.EDIT_KEY_16));
 		if (entryRemoveItem == null)
 			entryRemoveItem = new MenuItem("_Remove Entry",
-					ImageResource.getImageView(ImageResourceType.REMOVE_ENTRY));
+					ImageResource.getImageView(ImageResourceType.REMOVE_KEY_16));
 		if (clipboardUrlItem == null)
-			clipboardUrlItem = new MenuItem("Copy _URL",
+			clipboardUrlItem = new MenuItem(
+					"Copy _URL",
 					ImageResource
-							.getImageView(ImageResourceType.CLIPBOARD_INVOICE));
+							.getImageView(ImageResourceType.CLIPBOARD_INVOICE_16));
 		if (clipboardUserItem == null)
-			clipboardUserItem = new MenuItem("Copy User_name",
+			clipboardUserItem = new MenuItem(
+					"Copy User_name",
 					ImageResource
-							.getImageView(ImageResourceType.CLIPBOARD_INVOICE));
+							.getImageView(ImageResourceType.CLIPBOARD_INVOICE_16));
 		if (clipboardPasswordItem == null)
-			clipboardPasswordItem = new MenuItem("Copy _Password",
+			clipboardPasswordItem = new MenuItem(
+					"Copy _Password",
 					ImageResource
-							.getImageView(ImageResourceType.CLIPBOARD_INVOICE));
+							.getImageView(ImageResourceType.CLIPBOARD_INVOICE_16));
 
 		if (withAccelerator) {
 			entryAddItem.setAccelerator(KeyCombination.valueOf("Alt+Shift+A"));

@@ -103,6 +103,23 @@ public class MainWindow implements InternalAdapter {
 
 		VBox menubarToolbarBox = new VBox(0);
 
+		// HBox decoration = new HBox(5);
+		// decoration.setAlignment(Pos.CENTER_RIGHT);
+		//
+		// Button minimize = new Button("",
+		// ImageResource.getImageView(ImageResourceType.REMOVE_SMALL_16));
+		//
+		// Button maximize = new Button("",
+		// ImageResource.getImageView(ImageResourceType.ADD_SMALL_16));
+		//
+		// Button exit = new Button("",
+		// ImageResource.getImageView(ImageResourceType.ERROR_16));
+		// exit.setOnAction(new PWMActionEventHandler(Type.EXIT));
+		//
+		// decoration.getChildren().addAll(minimize, maximize, exit);
+		//
+		// menubarToolbarBox.getChildren().add(decoration);
+
 		if (createMenu) {
 			menubar = new MenuBar();
 			menubar.setUseSystemMenuBar(false);
@@ -119,7 +136,8 @@ public class MainWindow implements InternalAdapter {
 
 		if (menubarToolbarBox.getChildren().size() > 0) {
 			if (root instanceof GridPane)
-				((GridPane) root).add(menubarToolbarBox, 0, 0);
+				((GridPane) root).add(menubarToolbarBox, 0,
+						PWMJFXApplication.useCustomDecoration ? 1 : 0);
 			else
 				root.getChildren().add(menubarToolbarBox);
 		}
@@ -127,7 +145,8 @@ public class MainWindow implements InternalAdapter {
 		editor = new EditorWindow(this);
 		Pane editorPane = editor.createContent();
 		if (root instanceof GridPane) {
-			((GridPane) root).add(editorPane, 0, 1);
+			((GridPane) root).add(editorPane, 0,
+					PWMJFXApplication.useCustomDecoration ? 2 : 1);
 			GridPane.setHgrow(editorPane, Priority.ALWAYS);
 			GridPane.setVgrow(editorPane, Priority.ALWAYS);
 		} else
@@ -156,15 +175,15 @@ public class MainWindow implements InternalAdapter {
 		Menu file = new Menu("_File");
 
 		fileNewItem = new MenuItem("_New",
-				ImageResource.getImageView(ImageResourceType.NEW));
+				ImageResource.getImageView(ImageResourceType.NEW_DATABASE_16));
 		fileOpenItem = new MenuItem("_Open",
-				ImageResource.getImageView(ImageResourceType.OPEN));
+				ImageResource.getImageView(ImageResourceType.OPEN_DATABASE_16));
 		fileSaveItem = new MenuItem("_Save",
-				ImageResource.getImageView(ImageResourceType.SAVE));
+				ImageResource.getImageView(ImageResourceType.SAVE_16));
 		fileSaveAsItem = new MenuItem("Save As...",
-				ImageResource.getImageView(ImageResourceType.SAVE_AS));
+				ImageResource.getImageView(ImageResourceType.SAVE_AS_16));
 		fileExitItem = new MenuItem("E_xit",
-				ImageResource.getImageView(ImageResourceType.EXIT));
+				ImageResource.getImageView(ImageResourceType.EXIT_16));
 
 		fileNewItem.setAccelerator(KeyCombination.valueOf("Ctrl+N"));
 		fileOpenItem.setAccelerator(KeyCombination.valueOf("Ctrl+O"));
@@ -186,13 +205,14 @@ public class MainWindow implements InternalAdapter {
 		Menu group = new Menu("_Groups");
 
 		groupAddItem = new MenuItem("_Add Group",
-				ImageResource.getImageView(ImageResourceType.ADD_GROUP));
+				ImageResource.getImageView(ImageResourceType.ADD_FOLDER_16));
 		groupAddSubItem = new MenuItem("Add _Sub-Group",
-				ImageResource.getImageView(ImageResourceType.ADD_SUB_GROUP));
+				ImageResource
+						.getImageView(ImageResourceType.ADD_FOLDER_BOOKMARK_16));
 		groupEditItem = new MenuItem("_Edit Group",
-				ImageResource.getImageView(ImageResourceType.EDIT_GROUP));
+				ImageResource.getImageView(ImageResourceType.EDIT_FOLDER_16));
 		groupRemoveItem = new MenuItem("_Remove Group",
-				ImageResource.getImageView(ImageResourceType.REMOVE_GROUP));
+				ImageResource.getImageView(ImageResourceType.REMOVE_FOLDER_16));
 
 		groupAddItem.setAccelerator(KeyCombination.valueOf("Ctrl+Shift+A"));
 		groupAddSubItem.setAccelerator(KeyCombination.valueOf("Ctrl+Shift+S"));
@@ -212,11 +232,11 @@ public class MainWindow implements InternalAdapter {
 		Menu entry = new Menu("_Entry");
 
 		entryAddItem = new MenuItem("_Add Entry",
-				ImageResource.getImageView(ImageResourceType.ADD_ENTRY));
+				ImageResource.getImageView(ImageResourceType.ADD_KEY_16));
 		entryEditItem = new MenuItem("_Edit Entry",
-				ImageResource.getImageView(ImageResourceType.EDIT_ENTRY));
+				ImageResource.getImageView(ImageResourceType.EDIT_KEY_16));
 		entryRemoveItem = new MenuItem("_Remove Entry",
-				ImageResource.getImageView(ImageResourceType.REMOVE_ENTRY));
+				ImageResource.getImageView(ImageResourceType.REMOVE_KEY_16));
 
 		entryAddItem.setAccelerator(KeyCombination.valueOf("Alt+Shift+A"));
 		entryEditItem.setAccelerator(KeyCombination.valueOf("Alt+Shift+E"));
@@ -260,50 +280,51 @@ public class MainWindow implements InternalAdapter {
 	private void createToolbar(ToolBar toolbar) {
 
 		newButton = new Button(
-				ImageResource.getImage(ImageResourceType.NEW) == null ? "New"
-						: "", ImageResource.getImageView(ImageResourceType.NEW));
+				ImageResource.getImage(ImageResourceType.NEW_DATABASE_16) == null ? "New"
+						: "", ImageResource
+						.getImageView(ImageResourceType.NEW_DATABASE_16));
 		openButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Open"
-						: "",
-				ImageResource.getImageView(ImageResourceType.OPEN));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Open"
+						: "", ImageResource
+						.getImageView(ImageResourceType.OPEN_DATABASE_16));
 		saveButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Save"
-						: "",
-				ImageResource.getImageView(ImageResourceType.SAVE));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Save"
+						: "", ImageResource
+						.getImageView(ImageResourceType.SAVE_16));
 		saveAsButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Save As..."
-						: "",
-				ImageResource.getImageView(ImageResourceType.SAVE_AS));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Save As..."
+						: "", ImageResource
+						.getImageView(ImageResourceType.SAVE_AS_16));
 
 		addGroupButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Add Group"
-						: "",
-				ImageResource.getImageView(ImageResourceType.ADD_GROUP));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Add Group"
+						: "", ImageResource
+						.getImageView(ImageResourceType.ADD_FOLDER_16));
 		addSubGroupButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Add Sub-Group"
-						: "",
-				ImageResource.getImageView(ImageResourceType.ADD_SUB_GROUP));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Add Sub-Group"
+						: "", ImageResource
+						.getImageView(ImageResourceType.ADD_FOLDER_BOOKMARK_16));
 		editGroupButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Edit Group"
-						: "",
-				ImageResource.getImageView(ImageResourceType.EDIT_GROUP));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Edit Group"
+						: "", ImageResource
+						.getImageView(ImageResourceType.EDIT_FOLDER_16));
 		removeGroupButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Remove Group"
-						: "",
-				ImageResource.getImageView(ImageResourceType.REMOVE_GROUP));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Remove Group"
+						: "", ImageResource
+						.getImageView(ImageResourceType.REMOVE_FOLDER_16));
 
 		addEntryButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Add Entry"
-						: "",
-				ImageResource.getImageView(ImageResourceType.ADD_ENTRY));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Add Entry"
+						: "", ImageResource
+						.getImageView(ImageResourceType.ADD_KEY_16));
 		editEntryButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Edit Entry"
-						: "",
-				ImageResource.getImageView(ImageResourceType.EDIT_ENTRY));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Edit Entry"
+						: "", ImageResource
+						.getImageView(ImageResourceType.EDIT_KEY_16));
 		removeEntryButton = new Button(
-				ImageResource.getImage(ImageResourceType.OPEN) == null ? "Remove Entry"
-						: "",
-				ImageResource.getImageView(ImageResourceType.REMOVE_ENTRY));
+				ImageResource.getImage(ImageResourceType.OPEN_DATABASE_16) == null ? "Remove Entry"
+						: "", ImageResource
+						.getImageView(ImageResourceType.REMOVE_KEY_16));
 
 		newButton.setOnAction(getHandler(Type.NEW));
 		openButton.setOnAction(getHandler(Type.OPEN));

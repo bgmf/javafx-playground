@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -124,7 +125,7 @@ public class PWMActionEventHandler implements EventHandler<ActionEvent> {
 	}
 
 	private void handleExit(ActionEvent event) {
-		System.exit(0);
+		Platform.exit();
 	}
 
 	private void handleNew(ActionEvent event) {

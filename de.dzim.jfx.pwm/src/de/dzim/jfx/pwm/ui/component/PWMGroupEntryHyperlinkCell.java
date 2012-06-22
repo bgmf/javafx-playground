@@ -4,6 +4,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableCell;
 import de.dzim.jfx.pwm.handler.PWMActionEventHandler;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
+import de.dzim.jfx.ui.resource.ImageResource;
+import de.dzim.jfx.ui.resource.ImageResource.ImageResourceType;
 import de.dzim.jfx.util.InternalAdapter;
 
 class PWMGroupEntryHyperlinkCell extends TableCell<PWMGroupEntry, String> {
@@ -27,6 +29,8 @@ class PWMGroupEntryHyperlinkCell extends TableCell<PWMGroupEntry, String> {
 		} else {
 			if (hyperlink != null) {
 				hyperlink.setText(getString());
+				hyperlink.setGraphic(ImageResource
+						.getImageView(ImageResourceType.EXTERNAL_BROWSER_16));
 			}
 			setText(null);
 			setGraphic(hyperlink);

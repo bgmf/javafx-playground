@@ -10,20 +10,20 @@ public class ImageResource {
 
 	public enum ImageResourceType {
 
-		//
-		// default icons
-		//
+		// ---------------------------
+		// default icons - START
+		// ---------------------------
 
 		// exit icon
-		EXIT("fugue_door-open-in.png"),
+		EXIT_16("fugue_door-open-in.png"),
 		// new icon
-		NEW("fugue_database--plus.png"),
+		NEW_16("new.gif"),
 		// open icon
-		OPEN("fugue_database.png"),
+		OPEN_16("fldr_obj.gif"),
 		// save icon
-		SAVE("save_edit.gif"),
+		SAVE_16("save_edit.gif"),
 		// save as icon
-		SAVE_AS("saveas_edit.gif"),
+		SAVE_AS_16("saveas_edit.gif"),
 
 		//
 		// message icons
@@ -47,6 +47,12 @@ public class ImageResource {
 		ADD_16("fugue_plus.png"),
 		// remove icon (simple minus)
 		REMOVE_16("fugue_minus.png"),
+		// error icon (with circle around it) - small
+		ERROR_SMALL_16("fugue_cross-small-circle.png"),
+		// add icon (simple plus) - small
+		ADD_SMALL_16("fugue_plus-small.png"),
+		// remove icon (simple minus) - small
+		REMOVE_SMALL_16("fugue_minus-small.png"),
 
 		// error icon (with circle around it)
 		ERROR_32("fugue_32_cross-circle.png"),
@@ -68,40 +74,16 @@ public class ImageResource {
 		REMOVE_32("fugue_32_minus.png"),
 
 		// next / forward
-		NEXT("fugue_arrow.png"),
+		NEXT_16("fugue_arrow.png"),
 		// back
-		BACK("fugue_arrow-180.png"),
-
-		//
-		// group icons
-		//
-
-		// add group icon
-		ADD_GROUP("fugue_folder--plus.png"),
-		// add sub group icon
-		ADD_SUB_GROUP("fugue_folder-bookmark.png"),
-		// edit group icon
-		EDIT_GROUP("fugue_folder--pencil.png"),
-		// remove group icon
-		REMOVE_GROUP("fugue_folder--minus.png"),
-
-		//
-		// entry icons
-		//
-
-		// add entry icon
-		ADD_ENTRY("fugue_key--plus.png"),
-		// edit entry icon
-		EDIT_ENTRY("fugue_key--pencil.png"),
-		// remove entry icon
-		REMOVE_ENTRY("fugue_key--minus.png"),
+		BACK_16("fugue_arrow-180.png"),
 
 		//
 		// clipboard icons
 		//
 
 		// invoice
-		CLIPBOARD_INVOICE("fugue_clipboard-invoice.png"),
+		CLIPBOARD_INVOICE_16("fugue_clipboard-invoice.png"),
 
 		//
 		// other icons
@@ -126,7 +108,58 @@ public class ImageResource {
 		// counter
 		COUNTER_16("fugue_counter.png"),
 		// counter 32x32
-		COUNTER_32("fugue_32_counter.png");
+		COUNTER_32("fugue_32_counter.png"),
+		// external browser
+		EXTERNAL_BROWSER_16("external_browser.gif"),
+
+		// ---------------------------
+		// default icons - END
+		// ---------------------------
+
+		// ---------------------------
+		// PWM Icons - START
+		// ---------------------------
+
+		// new db icon
+		NEW_DATABASE_16("fugue_database--plus.png"),
+		// open db icon
+		OPEN_DATABASE_16("fugue_database.png"),
+
+		//
+		// group icons
+		//
+
+		// add group icon
+		ADD_FOLDER_16("fugue_folder--plus.png"),
+		// add sub group icon
+		ADD_FOLDER_BOOKMARK_16("fugue_folder-bookmark.png"),
+		// edit group icon
+		EDIT_FOLDER_16("fugue_folder--pencil.png"),
+		// remove group icon
+		REMOVE_FOLDER_16("fugue_folder--minus.png"),
+
+		//
+		// entry icons
+		//
+
+		// add entry icon
+		ADD_KEY_16("fugue_key--plus.png"),
+		// edit entry icon
+		EDIT_KEY_16("fugue_key--pencil.png"),
+		// remove entry icon
+		REMOVE_KEY_16("fugue_key--minus.png");
+
+		// ---------------------------
+		// PWM Icons - END
+		// ---------------------------
+
+		// ---------------------------
+		// Counter Icons - START
+		// ---------------------------
+
+		// ---------------------------
+		// Counter Icons - START
+		// ---------------------------
 
 		private final String name;
 

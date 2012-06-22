@@ -417,9 +417,9 @@ public abstract class Dialog<T> extends Stage implements InternalAdapter {
 		// cancel
 		CANCEL("_Cancel", ImageResource.getImage(ImageResourceType.CANCEL_16)),
 		// next
-		NEXT("_Next", ImageResource.getImage(ImageResourceType.NEXT)),
+		NEXT("_Next", ImageResource.getImage(ImageResourceType.NEXT_16)),
 		// back
-		BACK("_Back", ImageResource.getImage(ImageResourceType.BACK)),
+		BACK("_Back", ImageResource.getImage(ImageResourceType.BACK_16)),
 		// help
 		HELP("_Help", ImageResource.getImage(ImageResourceType.QUESTION_16));
 

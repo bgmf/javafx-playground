@@ -44,6 +44,8 @@ import de.dzim.jfx.pwm.model.container.PWMContainer;
 import de.dzim.jfx.pwm.model.container.PWMContainerGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroup;
 import de.dzim.jfx.pwm.model.content.PWMGroupEntry;
+import de.dzim.jfx.ui.resource.ImageResource;
+import de.dzim.jfx.ui.resource.ImageResource.ImageResourceType;
 import de.dzim.jfx.util.InternalAdapter;
 
 public class EditorWindow implements InternalAdapter {
@@ -380,6 +382,8 @@ public class EditorWindow implements InternalAdapter {
 		}
 		hURL.setVisited(false);
 		hURL.setText(entry.getUrl() != null ? entry.getUrl() : "");
+		hURL.setGraphic(entry.getUrl() != null ? ImageResource
+				.getImageView(ImageResourceType.EXTERNAL_BROWSER_16) : null);
 		tDateAdd.setText(entry.getDateAdded() != null ? df.format(entry
 				.getDateAdded().getTime()) : "");
 		tDateMod.setText(entry.getDateModified() != null ? df.format(entry
