@@ -103,23 +103,6 @@ public class MainWindow implements InternalAdapter {
 
 		VBox menubarToolbarBox = new VBox(0);
 
-		// HBox decoration = new HBox(5);
-		// decoration.setAlignment(Pos.CENTER_RIGHT);
-		//
-		// Button minimize = new Button("",
-		// ImageResource.getImageView(ImageResourceType.REMOVE_SMALL_16));
-		//
-		// Button maximize = new Button("",
-		// ImageResource.getImageView(ImageResourceType.ADD_SMALL_16));
-		//
-		// Button exit = new Button("",
-		// ImageResource.getImageView(ImageResourceType.ERROR_16));
-		// exit.setOnAction(new PWMActionEventHandler(Type.EXIT));
-		//
-		// decoration.getChildren().addAll(minimize, maximize, exit);
-		//
-		// menubarToolbarBox.getChildren().add(decoration);
-
 		if (createMenu) {
 			menubar = new MenuBar();
 			menubar.setUseSystemMenuBar(false);

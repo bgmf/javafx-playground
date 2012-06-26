@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -37,16 +38,17 @@ public class PWMJFXApplication extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (useCustomDecoration && node != null) {
+		if (useCustomDecoration && node != null)
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-		}
 
 		primaryStage.setTitle(APPLICATION_TITLE);
 		primaryStage.getIcons().add(
 				ImageResource.getImage(ImageResourceType.LOCK_32));
 
+		StackPane root = new StackPane();
+		root.setId("root-pane");
+
 		GridPane grid = new GridPane();
-		grid.setId("root-grid-pane");
 
 		if (useCustomDecoration && node != null)
 			grid.add(node, 0, 0);
@@ -55,7 +57,9 @@ public class PWMJFXApplication extends Application {
 		window.setCreateMenu(true);
 		window.createContent();
 
-		Scene scene = new Scene(grid, 1024, 800);
+		root.getChildren().add(grid);
+
+		Scene scene = new Scene(root, 1024, 800);
 		scene.getStylesheets().add(CSS);
 
 		MessageDialog.CSS_PATH = CSS_DIALOG;

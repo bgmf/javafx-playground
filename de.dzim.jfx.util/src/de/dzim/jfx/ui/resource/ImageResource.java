@@ -45,12 +45,16 @@ public class ImageResource {
 		CANCEL_16("fugue_minus-circle.png"),
 		// add icon (simple plus)
 		ADD_16("fugue_plus.png"),
+		// edit icon (a pencil)
+		EDIT_16("fugue_pencil.png"),
 		// remove icon (simple minus)
 		REMOVE_16("fugue_minus.png"),
 		// error icon (with circle around it) - small
 		ERROR_SMALL_16("fugue_cross-small-circle.png"),
 		// add icon (simple plus) - small
 		ADD_SMALL_16("fugue_plus-small.png"),
+		// edit icon (a pencil) - small
+		EDIT_SMALL_16("fugue_pencil-small.png"),
 		// remove icon (simple minus) - small
 		REMOVE_SMALL_16("fugue_minus-small.png"),
 
